@@ -12,13 +12,13 @@ def pdf_path():
     return "examples/1978-geschaeftsbericht-data_subset.pdf"
 
 
-def test_extraction_and_translation(pdf_path, tmp_path):
+def test_workflow_creates_file(pdf_path, tmp_path):
     """Check that the workflow works on example pdf.
 
     The function extracts, translates and stores text.
     Arrange: Provie PDF path and temporary storage location.
-    Act: Apply function, then open stored result.
-    Assert: Check first characters of page 13 match expected content.
+    Act: Apply function.
+    Assert: Check whether file exists in temp location.
     """
     d = tmp_path / "output/"
     d.mkdir()
