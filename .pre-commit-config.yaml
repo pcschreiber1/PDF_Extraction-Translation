@@ -29,7 +29,7 @@ repos:
         # T000: ignore TODOs
         # T001: ignore print statements
         # W503: ignore linebreak before binary operator
-          - "--ignore=E203,T000,W503,"
+          - "--ignore=E203,T000,T001,W503,"
         additional_dependencies: [
             flake8-alfred,
             flake8-bugbear,
