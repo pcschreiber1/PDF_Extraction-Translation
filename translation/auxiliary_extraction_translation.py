@@ -331,4 +331,6 @@ def save_to_pdf(pdf, file_name, destination_folder="scripts/output/"):
         "PDF needs to be FPDF CustomPDF object as created\n"
         "by initialize_pdf_storage()."
     )
-    pdf.output(Path(destination_folder + file_name + ".pdf"))  # ,'F')
+    if not destination_folder[-1] in ["", "/"]:
+        destination_folder = destination_folder + "/"
+    pdf.output(Path(str(destination_folder) + str(file_name) + ".pdf"))
