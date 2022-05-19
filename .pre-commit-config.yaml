@@ -27,9 +27,7 @@ repos:
         # ignore errors for Black compatability
         # E203: ignore whitespace around " : "
         # T000: ignore TODOs
-        # W503: ignore linebreak before binary operator
-        # PT5006: ignore tuples as default for pytest parametrize
-          - "--ignore=E203,T000,W503,PT006,"
+          - "--ignore=T000,"
         additional_dependencies: [
             flake8-alfred,
             flake8-bugbear,
