@@ -34,11 +34,10 @@ def test_inval_input_5k_word(tokenizer):
     assert translate_extracted(text, tokenizer) == " <<Omitted Word >= 5000bytes>>"
 
 
-@pytest.mark.xfail()
+@pytest.mark.xfail(reason="Currently only implemented for extract_and_translate_file.")
 def test_paragraph(tokenizer):
     r"""Check that paragraphs are maintained.
 
-    xfail: Currently only implemented for extract_and_translate_file
     Paragraphs are identified by "\n\n", but \n\n at the beginning
     of a string is ignored.
     Arrange: Create string with valid and invalid paragraph.

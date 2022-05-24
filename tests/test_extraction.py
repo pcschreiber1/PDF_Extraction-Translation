@@ -34,11 +34,12 @@ def test_exclusion_tables_page13(pdf):
     assert extracted[:36] == "des Produktionspotentials anzusehen."
 
 
-@pytest.mark.xfail()
+@pytest.mark.xfail(
+    reason="PDFplumber is currently not recognising the table on Page 17 as a table."
+)
 def test_exclusion_tables_page17(pdf):
     """Check that tables are excluded from text.
 
-    xfail: PDFplumber currently not recognising table Page 17 as table.
     For legibility of the file and challenges in translation
     tables are currently ignored when extracting text from PDF.
     Arrange: Open PDF and select page with only table (Page 17)
