@@ -1,3 +1,9 @@
+# Ignore Sandbox
+Sandbox.ipynb
+
+# Ignore coverage report
+htmlcov/
+
 # Ignore the folder called __pycache__
 __pycache__/
 
