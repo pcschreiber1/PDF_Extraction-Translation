@@ -52,20 +52,18 @@ def extract_and_translate_file(file_path, destination_path, paths_relative=True)
 
     # Bring all pages together, save pdf
     # Find subfolders of file
-    if paths_relative is True:
+    if paths_relative:
         subdirectory_path = str(Path(file_path).relative_to(destination_path).parent)
+        dest_path = destination_path + "/output/" + subdirectory_path + "/"
 
-        auxiliary.save_to_pdf(
-            fpdf,
-            file_name=str(Path(file_path).stem),
-            destination_folder=destination_path + "/output/" + subdirectory_path + "/",
-        )
     else:
-        auxiliary.save_to_pdf(
-            fpdf,
-            file_name=str(Path(file_path).stem),
-            destination_folder=destination_path,
-        )
+        dest_path = destination_path
+
+    auxiliary.save_to_pdf(
+        fpdf,
+        file_name=str(Path(file_path).stem),
+        destination_folder=dest_path,
+    )
 
 
 if __name__ == "__main__":
