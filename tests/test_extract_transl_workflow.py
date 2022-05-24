@@ -45,7 +45,6 @@ def test_find_example_pdf():
     pdf_path = find_pdfs([""], ".", "")
 
     assert pdf_path == [
-        "examples/1978-geschaeftsbericht-data.pdf",
         "examples/1978-geschaeftsbericht-data_subset.pdf",
     ]
 
