@@ -19,11 +19,11 @@ class CustomPDF(FPDF):
         self.cell(0, 10, f"Page {self.page_no}", 0, 0, "C")
 
 
-def find_pdfs(desired_path, dest_path="scripts/sources/"):
+def find_pdfs(desired_path, dest_path="scripts/sources/", ignore_dnames="English"):
     """Search a set of specific (sub) folders for pdf files.
 
     Exclude everything that is in "English Folder"
-    Returns: List with strings of full path
+    Returns: List with strings of relative to dest_path in posix format.
     """
     container = []
     for path in desired_path:
@@ -38,8 +38,8 @@ def find_pdfs(desired_path, dest_path="scripts/sources/"):
                 # Select only ".pdf" files
                 for filename in [f for f in filenames if f.endswith(".pdf")]:
                     # Exclude folders that are not in subset of interest
-                    if {"English"}.isdisjoint(Path(dirpath).parts):
-                        container.append(dirpath + "/" + filename)
+                    if {ignore_dnames}.isdisjoint(Path(dirpath).parts):
+                        container.append(Path(dirpath + "/" + filename).as_posix())
 
     return container
 

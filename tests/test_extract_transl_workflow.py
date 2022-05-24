@@ -3,6 +3,7 @@ from pathlib import Path  # for Windows/Unix compatibility
 
 import pytest
 
+from translation.auxiliary_extraction_translation import find_pdfs
 from translation.text_extraction_translation import extract_and_translate_file
 
 
@@ -15,7 +16,8 @@ def pdf_path():
 def test_workflow_creates_file(pdf_path, tmp_path):
     """Check that the workflow works on example pdf.
 
-    The function extracts, translates and stores text.
+    `extract_and_translate_file()` extracts text from a PDF,
+    translates it and stores it again in a PDF.
     Arrange: Provie PDF path and temporary storage location.
     Act: Apply function.
     Assert: Check whether file exists in temp location.
@@ -30,3 +32,18 @@ def test_workflow_creates_file(pdf_path, tmp_path):
     file = str(d) + "/" + Path(pdf_path).stem + ".pdf"
 
     assert Path(file).exists()
+
+
+def test_find_example_pdf():
+    """Check that find_pdfs() works.
+
+    Arrange: Create temporary directory with PDF in subfolder.
+    Act: Apply find_pdfs().
+    Assert: Check that path is as expected.
+    """
+    pdf_path = find_pdfs([""], ".", "")
+
+    assert pdf_path == [
+        "examples/1978-geschaeftsbericht-data.pdf",
+        "examples/1978-geschaeftsbericht-data_subset.pdf",
+    ]
