@@ -3,6 +3,7 @@ from pathlib import Path  # for Windows/Unix compatibility
 
 import pytest
 
+from translation.auxiliary_extraction_translation import create_destination_dir
 from translation.auxiliary_extraction_translation import find_pdfs
 from translation.text_extraction_translation import extract_and_translate_file
 
@@ -37,8 +38,8 @@ def test_workflow_creates_file(pdf_path, tmp_path):
 def test_find_example_pdf():
     """Check that find_pdfs() works.
 
-    Arrange: Create temporary directory with PDF in subfolder.
-    Act: Apply find_pdfs().
+    Arrange: The project reposiotry contains pdfs.
+    Act: Let find_pdfs() search at root dir of project.
     Assert: Check that path is as expected.
     """
     pdf_path = find_pdfs([""], ".", "")
@@ -47,3 +48,21 @@ def test_find_example_pdf():
         "examples/1978-geschaeftsbericht-data.pdf",
         "examples/1978-geschaeftsbericht-data_subset.pdf",
     ]
+
+
+def test_create_destination_dir(tmp_path):
+    """Check creation of identical tree structure.
+
+    Arrange: Create temporary directory with sub-dir and file.
+    Act: Let create_destination_dir() create dir at parent.
+    Assert: Check whether subfolder exists.
+    """
+    dir_path = tmp_path / "sub/"
+    dir_path.mkdir()
+    file_path = dir_path / "hello.txt"
+    file_path.write_text("Content")
+
+    create_destination_dir(str(tmp_path), str(file_path))
+
+    assert Path(tmp_path / "output/sub").exists()
+    assert not Path(tmp_path / "output/sub/hello.txt").exists()
