@@ -54,7 +54,7 @@ def test_create_destination_dir(tmp_path):
 
     Arrange: Create temporary directory with sub-dir and file.
     Act: Let create_destination_dir() create dir at parent.
-    Assert: Check whether subfolder exists.
+    Assert: Check in new that subfolder exists but not file.
     """
     dir_path = tmp_path / "sub/"
     dir_path.mkdir()
