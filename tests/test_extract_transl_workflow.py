@@ -43,8 +43,10 @@ def test_find_example_pdf():
     Assert: Check that path is as expected.
     """
     pdf_path = find_pdfs([""], ".", "")
+    pdf_path.sort()
 
     assert pdf_path == [
+        "examples/1978-geschaeftsbericht-data.pdf",
         "examples/1978-geschaeftsbericht-data_subset.pdf",
     ]
 
