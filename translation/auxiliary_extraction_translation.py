@@ -47,24 +47,30 @@ def find_pdfs(desired_path, dest_path="scripts/sources/", ignore_dnames="English
 def create_destination_dir(destination_folder, file_path):
     """Create copy of the desired directory structure, no files.
 
-    The new directory under which the strucutre is created is called "ouput/".
+    The new directory under which the structure is created is called "ouput/".
     Args:
         destination_folder: string with absolute path to destination folder
         file_path: string with absolute path to desired file
     """
     # Check that folder exists locally
-    assert Path(destination_folder).exists(), (
-        f"The Destination directory {destination_folder}" " does not exist locally."
-    )
+    if not Path(destination_folder).exists():
+        raise ValueError(
+            f"The Destination directory {destination_folder} does not exist locally."
+        )
 
     # Check that file is part of destination folder
-    assert Path(file_path).is_relative_to(destination_folder)
+    if not Path(file_path).is_relative_to(destination_folder):
+        raise ValueError(
+            (
+                f"The file path {file_path} is not relative to"
+                "the destination directory {destination_folder}."
+            )
+        )
 
     # Check that file_path leads to a file
     # NOTE: Otherwise taking the parent does not make sense
-    assert os.path.isfile(
-        Path(file_path)
-    ), f"The File Path {file_path} does not exist locally"
+    if not os.path.isfile(Path(file_path)):
+        raise ValueError(f"The File Path {file_path} does not exist locally")
 
     # Create "output/" subdirectory if not already exist
     if not Path(destination_folder + "/output").exists():
