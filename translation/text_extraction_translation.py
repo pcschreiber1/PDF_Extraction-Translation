@@ -66,7 +66,8 @@ def extract_and_translate_file(file_path, destination_path, paths_relative=True)
     )
 
 
-if __name__ == "__main__":
+def main():
+    """Translate specified PDF reports."""
     # Set-up
     desired = [
         "BEL/CB_Reports",
@@ -86,3 +87,7 @@ if __name__ == "__main__":
     for file in pdf_list:
         print(file)
         extract_and_translate_file(file_path=file, destination_path=dest_path)
+
+
+if __name__ == "__main__":
+    main()
